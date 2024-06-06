@@ -1,0 +1,148 @@
+{{! Use the main layout }}
+{{!< main }}
+<!-- https://emoji-api.com/ -->
+
+{{! New Post Submission Form }}
+<section class="content-container">
+    {{#if loggedIn}}
+        <!-- show the create post form when logged in -->
+        <section class="post-form">
+            <!-- make a header here -->
+            <h2>Create a New {{{postNeoType}}}</h2>
+            <form action="/posts" method="POST">
+                <!-- title input field name = "title" -->
+                <div>
+                    <input type="text" id="title" name="title" required placeholder="Enter title...">
+                </div>
+                <!-- text area input field name = "content" -->
+                <div>
+                    <textarea id="content" name="content" rows="4" required placeholder="Enter content..."></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="emoji-button" onclick="toggleEmojiPanel()">😀</button>
+                    <button type="submit" class="post-button">Post</button>
+                </div>
+            </form>
+
+            <div id="emoji-container" class="emoji-panel" style="display: none;">
+                <!-- input field for the emoji search, use oninput="searchEmojis()" -->
+                <input type="text" id="emoji-search" placeholder="Search emojis..." oninput="searchEmojis()">
+                <!-- a div, id = "emoji-grid" -->
+                <div id="emoji-grid"></div>
+            </div>
+        </section>
+    {{/if}}
+
+    <section id="popular-tags">
+        <h2>What’s Mooing</h2>
+        <ul>
+            {{#each popularTags}}
+                <li>
+                    <button class="tag-button" data-tag="{{this.tag}}" onclick="handleTagClick(event)">
+                        {{this.tag}} - {{this.count}} Moos
+                    </button>
+                </li>
+            {{/each}}
+        </ul>
+    </section>
+
+    <section class="posts-list">
+        <!-- recent posts -->
+        <div class="header-container">
+            <div class="center-container">
+                <h2>Recent {{{postNeoType}}}s</h2>
+            </div>
+            <select id="sortOptions" onchange="sortPosts()">
+                <option disabled selected value> Select an Option</option>
+                <option value="recency">Sort by Recency</option>
+                <option value="likes">Sort by Likes</option>
+            </select>
+        </div>
+        {{#if posts.length}}
+        <ul>
+            {{#each posts}}
+                {{> post this userName=../userName user=../user}}            
+            {{/each}}
+        </ul>
+        {{else}}
+            <!-- no posts, oh no, what now? -->
+            <p>No posts available. Be the first to create one!</p>
+        {{/if}}
+    </section>
+</section>
+
+
+{{! JavaScript for Emoji Integration }}
+<script>
+/*
+ You want to show a subset of the emojis. About 200. However,
+ you also want the user to be able to search all emojis,
+ so, put them in this array when the array is empty so 
+ that you have them.
+*/
+const emojiApiKey = "{{ emojiApiKey }}";
+let allEmojis = [];  // Global list to hold all emojis
+
+function toggleEmojiPanel() {
+    const container = document.getElementById('emoji-container');
+    container.style.display = container.style.display === 'none' ? 'block' : 'none';
+    console.log("weorjerter");
+
+    if (container.style.display === 'block' && !allEmojis.length) {
+        fetch(`https://emoji-api.com/emojis?access_key=${emojiApiKey}`)
+        .then(response => response.json())
+        .then(data => {
+            allEmojis = data;  // Directly assign data to allEmojis
+            displayEmojis(allEmojis);
+        })
+        .catch(error => console.error('Error fetching emojis:', error));
+    }
+}
+
+function displayEmojis(emojis, limit = 200) {
+    const container = document.getElementById('emoji-grid');
+    container.innerHTML = '';  // Clear previous results
+    if (emojis.length) {
+        emojis.slice(0, limit).forEach(({ character }) => {
+            const emojiElement = document.createElement('span');
+            emojiElement.textContent = character;
+            emojiElement.style.cursor = 'pointer';
+            emojiElement.onclick = () => insertEmoji(character);
+            container.appendChild(emojiElement);
+        });
+    } else {
+        container.textContent = 'No emojis found. Try a different search!';
+    }
+}
+
+function searchEmojis() {
+    const searchTerm = document.getElementById('emoji-search').value.toLowerCase();
+    fetch(`https://emoji-api.com/emojis?search=${searchTerm}&access_key=${emojiApiKey}`)
+        .then(response => response.json())
+        .then(data => {
+            displayEmojis(data); 
+        })
+        .catch(error => console.error('Error fetching emojis:', error));
+}
+
+function insertEmoji(emoji) {
+    const textarea = document.getElementById('content');
+    const cursorPosition = textarea.selectionStart;
+    textarea.setRangeText(emoji, cursorPosition, cursorPosition, 'end');
+    textarea.focus();
+}
+
+function sortPosts() {
+    const sortOption = document.getElementById('sortOptions').value;
+    console.log(sortOption);
+    window.location.href = `/?sort=${sortOption}`;
+}
+
+function handleTagClick(event) {
+    const tag = event.target.getAttribute('data-tag');
+    console.log(`Tag clicked: ${tag}`);
+    window.location.href = `/?tag=${encodeURIComponent(tag)}`;
+}
+
+</script>

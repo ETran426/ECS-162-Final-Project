@@ -1,0 +1,14 @@
+{{! Use the main layout }}
+{{!< main }}
+<!-- https://www.w3schools.com/html/html_form_input_types.asp -->
+
+<section class="login-register">
+    <section class="login-area">
+        <h2>Login With Google</h2>
+        <!-- errors will appear here -->
+        {{#if loginError}}
+            <p style="color: red;">{{loginError}}</p>
+        {{/if}}
+        <a href="/auth/google" class="button">Sign In with Google</a>
+    </section>
+</section>

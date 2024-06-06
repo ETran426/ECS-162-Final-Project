@@ -1,0 +1,91 @@
+{{! Partial for a single post }}
+<div class="post">
+    <div class="post-avatar">
+        <!-- the user's avatar -->
+        <img src="{{this.avatar_url}}" alt="The avatar of {{this.username}}">
+    </div>
+    <div class="post-content preserve-newlines">
+        <!-- the post -->
+        <h3>{{this.title}}</h3>
+        
+        <p>{{this.content}}</p>
+        <hr class="bounds">
+        <div class="post-status-bar">
+            <!-- everything that is shown in the status bar -->
+            <!-- Heart = ♥ -->
+            <!-- font awesome  trashcan = <i class="fas fa-trash-alt"> </i>-->
+            
+            {{#ifCond userName this.username}}
+                <button class="delete-button" data-id="{{this.id}}" onclick="handleDeleteClick(event)">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+            {{else}}
+                <button class="like-button" data-id="{{this.id}}" onclick="handleLikeClick(event)">
+                    ♥
+                </button>
+            {{/ifCond}}
+            
+            <p class="likes">{{this.likes}} Likes</p>
+            <p class="timestamp">Posted by {{this.username}} on {{this.timestamp}}</p>
+        </div>   
+        <div class="comments-section">
+            <h4>Comments</h4>
+            {{#each this.comments}}
+                <div class="comment">
+                    <p>{{this.content}}</p>
+                    <span>Mooed by {{this.username}} on {{this.timestamp}}</span>
+                </div>
+            {{/each}}
+            {{#if userName}}
+                <form action="/comments" method="POST">
+                    <input type="hidden" name="postId" value="{{this.id}}">
+                    <textarea name="content" placeholder="Moo back here..." required></textarea>
+                    <button type="submit">Add Comment</button>
+                </form>
+            {{else}}
+                <p>Please <a href="/login">login</a> to comment.</p>
+            {{/if}}
+        </div>
+    </div>
+</div>
+
+<script>
+async function handleLikeClick(event) {
+    const postId = event.target.getAttribute('data-id');
+
+    try {
+        const response = await fetch(`/like/${postId}`, {
+            method: 'POST',
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        window.location.reload();
+    } catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
+    }
+}
+
+async function handleDeleteClick(event) {
+    const buttonElement = event.target.closest('.delete-button');
+    const postId = buttonElement.getAttribute('data-id');        
+
+    try {
+        const response = await fetch(`/delete/${postId}`, {
+            method: 'POST'
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const postElement = event.target.closest('.post');
+        postElement.remove();
+        window.location.reload();
+    } catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
+    }
+}    
+</script>

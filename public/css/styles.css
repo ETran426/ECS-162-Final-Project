@@ -1,0 +1,557 @@
+body {
+    font-family: "Proxima Nova", "Ryman Eco", "Freight Text";
+    margin: 0;
+    
+}
+
+a {
+    text-decoration: none;
+}
+
+.flex {
+    display: flex;
+    max-width: 85%;
+    margin: 0 auto;
+    padding: 20px;
+    justify-content: space-between;
+}
+
+/* Start of header styles */
+header {
+    background-color: #022851;
+    padding: 0 20px;
+    position: relative; 
+    border-bottom: 2px solid #FFBF00;
+}
+
+nav {
+    margin: 10px 0 0;
+}
+
+nav li {
+    display: inline-block;
+    margin: 0 20px;
+}
+
+nav li a {
+    color: #eee;
+    font-weight: 400;
+}
+
+nav li a:hover {
+    color: #FFBF00;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo h1 {
+    color: #FFBF00; 
+    margin: 5%; 
+}
+
+.logo img {
+    width: 150px;
+    height: auto;
+}
+
+/* Additional styles for user-info */
+.user-info {
+    position: relative; /* Change to relative */
+    margin-left: auto; 
+}
+
+.header-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #FFBF00;
+    position: absolute; /* Position relative to the user-info */
+    top: 50%; 
+    transform: translateY(-75%); /* Adjust for vertical centering */
+    right: -50px; 
+}
+
+/* Styles for loginRegister */
+.login-register {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    width: 80%;
+    margin: 20px auto;
+}
+
+.login-area, .register-area {
+    width: 45%;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    min-height: 500px; 
+}
+
+.login-area h2, .register-area h2 {
+    text-align: center;
+}
+
+.login-area{
+    display: flex;
+    flex-direction: column;
+}
+
+.login-area, .register-area form {
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.register-area form h3 {
+    margin-bottom: 5px;
+}
+
+.register-area form input {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.login-area .button, .register-area button {
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    background-color: #022851;
+    color: #fff;
+    cursor: pointer;
+}
+
+.login-area button:hover, .register-area button:hover {
+    background-color: #FFBF00;
+}
+
+
+/*Post styles */
+/* Sort bar and header for post*/
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 75%;
+    position: relative; 
+    margin: 20px;
+}
+
+.center-container {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    width: 100%;
+    position: relative;
+}
+
+.center-container h2 {
+    position: absolute; 
+    left: 58%;
+    transform: translateX(55%);
+    text-align: center;
+    margin: 10px;
+    font-size: 30px;
+}
+
+#sortOptions {
+    padding: 5px;
+    font-size: 16px;
+}
+
+
+.post {
+    display: flex;
+    width: 55%; 
+    height: auto; 
+    margin: 20px auto; 
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.post-content-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.post-avatar {
+    margin-right: 7%; /* Space between avatar and content */
+}
+
+.post-avatar img {
+    border-radius: 50%;
+    width: 100px; 
+    height: 100px; 
+    object-fit: cover;
+}
+
+.post-content {
+    flex: 1; /* Fill remaining horizontal space */
+}
+
+.bounds {
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 10px 0;
+    width: 100%;
+}
+
+.post-status-bar {
+    display: flex;
+    align-items: center; 
+    justify-content: flex-start; 
+}
+
+.post-status-bar button {
+    margin-right: 10%; /* Add spacing between button and likes count */
+    padding: 10px; 
+    font-size: 20px; 
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    align-self: flex-start; 
+}
+
+.post-status-bar button:hover {
+    background-color: #f0f0f0; /* Hover background color */
+    border-radius: 50%; 
+}
+
+.post-status-bar .likes {
+    font-size: 14px;
+    margin-top: auto; 
+}
+
+.post-status-bar .timestamp {
+    margin-left: auto; /* Align to the leftmost position */
+    font-size: 14px;
+    margin-top: auto; 
+}
+
+.post-form {
+    display: flex;
+    flex-direction: column;
+    width: 50%; 
+    height: auto; 
+    margin: 5% auto; 
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.post-form h2 {
+    margin-top: 0;
+}
+
+.post-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.post-form input[type="text"],
+.post-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; 
+}
+
+.post-form .form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post-form .emoji-button,
+.post-form .post-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.post-form .emoji-button {
+    background-color: #FFBF00; 
+}
+
+.post-form .post-button{
+    background-color: #022851; 
+    color: white;
+}
+
+.post-form .emoji-panel {
+    margin-top: 15px;
+}
+
+.post-form #emoji-search {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.post-form #emoji-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+/* Comments */
+/* Comments Section */
+.comments-section {
+    margin-top: 20px;
+}
+
+.comments-section h4 {
+    margin-bottom: 15px;
+    font-size: 20px;
+    color: #022851;
+}
+
+.comment {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+.comment p {
+    margin: 0 0 5px;
+    font-size: 14px;
+}
+
+.comment span {
+    font-size: 12px;
+    color: #777;
+}
+
+.comments-section form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+}
+
+.comments-section textarea {
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+}
+
+.comments-section button {
+    align-self: flex-end;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #022851;
+    color: #fff;
+    cursor: pointer;
+}
+
+.comments-section button:hover {
+    background-color: #FFBF00;
+}
+
+.comments-section p a {
+    color: #022851;
+    font-weight: bold;
+}
+
+.comments-section p a:hover {
+    color: #FFBF00;
+}
+
+/* Trending Bar*/
+#popular-tags {
+    position: fixed;
+    top: 12%; /* Adjust as needed */
+    right: 2%; /* Adjust as needed */
+    width: 13%; /* Adjust as needed */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000; /* Ensure it stays on top */
+}
+
+#popular-tags h2 {
+    font-size: 24px;
+    color: #022851;
+    margin-bottom: 15px;
+}
+
+#popular-tags ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#popular-tags li {
+    margin: 5px 0;
+    display: block; /* Ensures each list item is a block element */
+}
+
+.tag-button {
+    width: 100%; /* Full width of the container */
+    padding: 25px 0; /* Height to create a square button */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #022851;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+    transition: background-color 0.3s, border-color 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tag-button:hover {
+    background-color: #FFBF00;
+    border-color: #FFBF00;
+}
+
+/* Profile styles */
+.profile-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+
+.profile-avatar {
+    margin-right: 5%;
+    margin-left: auto;
+}
+
+.profile-avatar-image {
+    width: 200px; /* Adjust size as needed */
+    height: 200px; /* Adjust size as needed */
+    border-radius: 50%; /* Make the image round */
+    object-fit: cover;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    width: 50%; 
+    height: auto; 
+    margin: 5% auto; 
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-info h2 {
+    margin-bottom: 5px;
+}
+
+.profile-info h3 {
+    margin: 0;
+    font-weight: normal;
+}
+
+.user-posts h2 {
+    font-size: 36px;
+    text-align: center;
+}
+
+
+/* error */
+.error-container {
+    text-align: center;
+    margin: 5%; /* Adjust as needed */
+}
+
+.error-container h1 {
+    color: #FFBF00; /* Red color for the header */
+}
+
+
+/* footer styles */
+footer {
+    border-top: 2px solid #FFBF00; 
+    background-color: #022851;
+    padding: 10px 0;
+    text-align: center;
+    color: #ddd;
+}
+
+footer a{
+    color: #FFBF00;
+}
+
+/* Media query */
+@media screen and (max-width: 1200px) {
+    .profile-container {
+        display: flex;
+        flex-direction: column; /* Stack elements vertically */
+        align-items: center; 
+    }
+
+    .profile-avatar {
+        margin-top: 20px; 
+        margin-bottom: 20px; 
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    #popular-tags {
+        position: fixed;
+        top: 12%; 
+        right: 2%; 
+        width: 10%; 
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        z-index: 1000; /* Ensure it stays on top */
+    }
+
+    .header-container {
+        flex-direction: column;
+        align-items: center;
+        left: 5%;
+    }
+
+    .center-container {
+        position: static; /* Change position to static */
+        transform: none; /* Reset transform */
+        
+        width: 100%;
+        margin-bottom: 10px; /* Add space between the h2 and the select */
+    }
+
+    .center-container h2 {
+        position: static; /* Change position to static */
+        margin: 10px 0;
+    }
+
+    #sortOptions {
+        width: 50%; 
+        max-width: 300px; 
+        margin-top: 10px;
+        left: 5%;
+    }
+    
+}
