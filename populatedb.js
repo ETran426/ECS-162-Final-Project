@@ -11,10 +11,10 @@ async function initializeDB() {
     const db = await sqlite.open({ filename: dbFileName, driver: sqlite3.Database });
 
     // Clear existing tables
-    await db.exec(`DROP TABLE IF EXISTS users;`);
-    await db.exec(`DROP TABLE IF EXISTS posts;`);
-    await db.exec(`DROP TABLE IF EXISTS comments;`);
-    await db.exec(`DROP TABLE IF EXISTS tags;`);
+    // await db.exec(`DROP TABLE IF EXISTS users;`);
+    // await db.exec(`DROP TABLE IF EXISTS posts;`);
+    // await db.exec(`DROP TABLE IF EXISTS comments;`);
+    // await db.exec(`DROP TABLE IF EXISTS tags;`);
 
     await db.exec(`
         CREATE TABLE IF NOT EXISTS users (
